@@ -1,0 +1,293 @@
+
+{
+	"toJSON" : true,
+	"extraProperties" : 
+	{
+		"version" : "2",
+		"classes" : 
+		{
+			"Tables" : 
+			{
+				"panelColor" : "#7F7F7F",
+				"panel" : 
+				{
+					"isOpen" : "true",
+					"pathVisible" : true,
+					"position" : 
+					{
+						"X" : 746,
+						"Y" : 56
+					}
+				}
+			},
+			"Filters" : 
+			{
+				"panelColor" : "#8DB3E2",
+				"panel" : 
+				{
+					"isOpen" : "true",
+					"pathVisible" : true,
+					"position" : 
+					{
+						"X" : 356,
+						"Y" : 51
+					}
+				}
+			},
+			"FilterStates" : 
+			{
+				"panelColor" : "#C3D69B",
+				"panel" : 
+				{
+					"isOpen" : "true",
+					"pathVisible" : true,
+					"position" : 
+					{
+						"X" : 40,
+						"Y" : 159
+					}
+				}
+			},
+			"Users" : 
+			{
+				"panelColor" : "#fff",
+				"panel" : 
+				{
+					"isOpen" : "true",
+					"pathVisible" : true,
+					"position" : 
+					{
+						"X" : 370,
+						"Y" : 344
+					}
+				}
+			}
+		},
+		"model" : 
+		{
+			"scriptMode" : "manual",
+			"workspaceLeft" : 0,
+			"workspaceTop" : 0,
+			"lastScriptLocation" : 
+			{
+				"FilterStates" : 
+				{
+					"events" : "FilterStates/FilterStates-events.js",
+					"method" : "FilterStates/FilterStates-methods.js"
+				}
+			},
+			"relationCurve" : 
+			{
+				"run" : true,
+				"mode" : 1
+			}
+		}
+	},
+	"dataClasses" : 
+	[
+		{
+			"name" : "Filters",
+			"className" : "Filters",
+			"collectionName" : "FiltersCollection",
+			"scope" : "public",
+			"publishAsJSGlobal" : true,
+			"attributes" : 
+			[
+				{
+					"name" : "ID",
+					"kind" : "storage",
+					"scope" : "public",
+					"indexed" : true,
+					"unique" : true,
+					"autosequence" : true,
+					"type" : "long",
+					"indexKind" : "btree",
+					"identifying" : true
+				},
+				{
+					"name" : "FilterName",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "string"
+				},
+				{
+					"name" : "Table",
+					"kind" : "relatedEntity",
+					"scope" : "public",
+					"type" : "Tables",
+					"path" : "Tables"
+				},
+				{
+					"name" : "States",
+					"kind" : "relatedEntities",
+					"scope" : "public",
+					"type" : "FilterStatesCollection",
+					"reversePath" : true,
+					"path" : "Filter"
+				}
+			],
+			"key" : 
+			[
+				{
+					"name" : "ID"
+				}
+			]
+		},
+		{
+			"name" : "FilterStates",
+			"className" : "FilterStates",
+			"collectionName" : "FilterStatesCollection",
+			"scope" : "public",
+			"publishAsJSGlobal" : false,
+			"attributes" : 
+			[
+				{
+					"name" : "ID",
+					"kind" : "storage",
+					"scope" : "public",
+					"indexed" : true,
+					"unique" : true,
+					"autosequence" : true,
+					"type" : "long",
+					"indexKind" : "btree"
+				},
+				{
+					"name" : "FilterState",
+					"kind" : "storage",
+					"scope" : "public",
+					"not_null" : true,
+					"type" : "long",
+					"minValue" : "0",
+					"maxValue" : "1",
+					"defaultValue" : "0"
+				},
+				{
+					"name" : "Filter",
+					"kind" : "relatedEntity",
+					"scope" : "public",
+					"type" : "Filters",
+					"path" : "Filters"
+				},
+				{
+					"name" : "User",
+					"kind" : "relatedEntity",
+					"scope" : "public",
+					"type" : "Users",
+					"path" : "Users"
+				},
+				{
+					"name" : "FilterPending",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "long",
+					"minValue" : "0",
+					"maxValue" : "1"
+				}
+			],
+			"events" : 
+			[
+				{
+					"kind" : "onSave",
+					"from" : "model.FilterStates.events.onSave",
+					"userDefined" : true
+				}
+			],
+			"methods" : 
+			[
+				{
+					"name" : "syncStates",
+					"applyTo" : "dataClass",
+					"scope" : "public",
+					"from" : "model.FilterStates.methods.syncStates",
+					"userDefined" : true
+				}
+			],
+			"key" : 
+			[
+				{
+					"name" : "ID"
+				}
+			]
+		},
+		{
+			"name" : "Tables",
+			"className" : "Tables",
+			"collectionName" : "TablesCollection",
+			"scope" : "public",
+			"publishAsJSGlobal" : true,
+			"attributes" : 
+			[
+				{
+					"name" : "ID",
+					"kind" : "storage",
+					"scope" : "public",
+					"indexed" : true,
+					"unique" : true,
+					"autosequence" : true,
+					"type" : "long",
+					"indexKind" : "btree",
+					"identifying" : true
+				},
+				{
+					"name" : "TableName",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "string"
+				},
+				{
+					"name" : "Filters",
+					"kind" : "relatedEntities",
+					"scope" : "public",
+					"type" : "FiltersCollection",
+					"reversePath" : true,
+					"path" : "Table"
+				}
+			],
+			"key" : 
+			[
+				{
+					"name" : "ID"
+				}
+			]
+		},
+		{
+			"name" : "Users",
+			"className" : "Users",
+			"collectionName" : "UsersCollection",
+			"scope" : "public",
+			"attributes" : 
+			[
+				{
+					"name" : "ID",
+					"kind" : "storage",
+					"scope" : "public",
+					"indexed" : true,
+					"unique" : true,
+					"autosequence" : true,
+					"type" : "long",
+					"indexKind" : "btree"
+				},
+				{
+					"name" : "UserName",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "string"
+				},
+				{
+					"name" : "filterStatesCollection",
+					"kind" : "relatedEntities",
+					"scope" : "public",
+					"type" : "FilterStatesCollection",
+					"reversePath" : true,
+					"path" : "User"
+				}
+			],
+			"key" : 
+			[
+				{
+					"name" : "ID"
+				}
+			]
+		}
+	]
+}
