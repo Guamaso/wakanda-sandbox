@@ -261,8 +261,8 @@
 #filters_wrap {
 	 z-index: 6;
 	 width: 294px;
-	 height: 487px;
 	 top: 60px;
+	 bottom: 307px;
 	 left: 54px;
 	
 	 position: absolute;
@@ -317,8 +317,8 @@
 #avail_filters {
 	 z-index: 8;
 	 width: 270px;
-	 height: 330px;
 	 top: 90px;
+	 bottom: 65px;
 	 left: 11px;
 	
 	 position: absolute;

@@ -156,17 +156,19 @@
 					"kind" : "storage",
 					"scope" : "public",
 					"not_null" : true,
-					"type" : "long",
-					"minValue" : "0",
-					"maxValue" : "1",
-					"defaultValue" : "0"
+					"type" : "bool"
 				},
 				{
-					"name" : "Filter",
-					"kind" : "relatedEntity",
+					"name" : "FilterPending",
+					"kind" : "storage",
 					"scope" : "public",
-					"type" : "Filters",
-					"path" : "Filters"
+					"type" : "bool"
+				},
+				{
+					"name" : "FilterActive",
+					"kind" : "storage",
+					"scope" : "public",
+					"type" : "bool"
 				},
 				{
 					"name" : "User",
@@ -176,12 +178,11 @@
 					"path" : "Users"
 				},
 				{
-					"name" : "FilterPending",
-					"kind" : "storage",
+					"name" : "Filter",
+					"kind" : "relatedEntity",
 					"scope" : "public",
-					"type" : "long",
-					"minValue" : "0",
-					"maxValue" : "1"
+					"type" : "Filters",
+					"path" : "Filters"
 				}
 			],
 			"events" : 
@@ -274,7 +275,7 @@
 					"type" : "string"
 				},
 				{
-					"name" : "filterStatesCollection",
+					"name" : "MyFilters",
 					"kind" : "relatedEntities",
 					"scope" : "public",
 					"type" : "FilterStatesCollection",

@@ -2,7 +2,7 @@
 	This CSS file, which was automatically created by Wakanda, allows you to share CSS styles for all the widgets on the Pages in your project.
 	The CSS styles that are created when you create a Widget Role are placed in this file too.
 */
-#filters_wrap
+/*#filters_wrap
 {
 	height:90vh;
 }
@@ -11,7 +11,7 @@
 {
 	height:75%;
 	position:relative;
-}
+}*/
 
 .lock_position
 {
