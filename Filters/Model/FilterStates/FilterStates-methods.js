@@ -8,7 +8,9 @@ model.FilterStates.methods.syncStates = function( mode ) {
 		
 		filter_states.forEach(function( item )
 		{
-			item.FilterState = item.FilterPending;
+			var newState = item.FilterPending;
+			newState = (newState == 1 || newState == true ) ? true : false;
+			item.FilterState = newState;
 		});
 			
 	}
@@ -18,7 +20,9 @@ model.FilterStates.methods.syncStates = function( mode ) {
 		
 		filter_states.forEach(function( item )
 		{
-			item.FilterPending = item.FilterState;
+			var newState = item.FilterState;
+			newState = (newState == 1 || newState == true ) ? true : false;
+			item.FilterPending = newState;
 		});
 			
 	}

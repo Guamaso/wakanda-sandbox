@@ -2,6 +2,7 @@
 WAF.onAfterInit = function onAfterInit() {// @lock
 
 // @region namespaceDeclaration// @startlock
+	var fe_all_filters = {};	// @dataGrid
 	var fe_search = {};	// @textField
 	var search_filters = {};	// @textField
 	var fe_save = {};	// @button
@@ -13,6 +14,13 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 
 // eventHandlers// @lock
 
+	fe_all_filters.onCellClick = function fe_all_filters_onCellClick (event)// @startlock
+	{// @endlock
+		
+			sources.filterStates1.save();
+			sources.filterStates.query("FilterPending = true");
+	};// @lock
+	
 	fe_search.keyup = function fe_search_keyup (event)// @startlock
 	{// @endlock
 		// Add your code here
@@ -24,7 +32,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	{// @endlock
 		//do query live search
 		var search_string = $$('search_filters').getValue();
-		sources.filterStates.query("FilterState = 1 AND Filter.FilterName == :1", {params:["*" + search_string + "*"]});
+		sources.filterStates.query("FilterState = true AND Filter.FilterName == :1", {params:["*" + search_string + "*"]});
 	};// @lock
 
 	fe_save.click = function fe_save_click (event)// @startlock
@@ -39,7 +47,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			$$('toggle_filter_edit').show();
 			//sources.filterStates.collectionRefresh();
 			sources.filterStates1.collectionRefresh();
-		sources.filterStates.query("FilterState == 1");
+			sources.filterStates.query("FilterState = true");
+			$$('search_filters').show();
 	        
 	    } },"save");
 	};// @lock
@@ -58,7 +67,8 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 			$$('toggle_filter_edit').show();
 			//sources.filterStates.collectionRefresh();
 			sources.filterStates1.collectionRefresh();
-		sources.filterStates.query("FilterState == 1");
+			sources.filterStates.query("FilterState == true");
+			$$('search_filters').show();
 	        
 	    } },"cancel");
 	};// @lock
@@ -68,6 +78,11 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		//show edit pane
 		$$('filter_edit').show();
 		this.hide();
+		//switch query to use pending states
+		//sources.filterStates.all();
+		sources.filterStates.query("FilterPending = true");
+		$$('search_filters').hide();
+		
 	};// @lock
 
 	//traps all clicks within container
@@ -123,10 +138,17 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 		//console.log($$("avail_filters").column("FilterState").width);
 		
 		//filter down the main filters to show only active filters
-		sources.filterStates.query("FilterState == 1");
+		sources.filterStates.query("FilterState == true");
+		
+		$("#fe_all_filters input.waf-dataGrid-checkbox").bind("click",function(e)
+		{
+			console.log("CHECKBOX!");
+		
+		});
 	};// @lock
 
 // @region eventManager// @startlock
+	WAF.addListener("fe_all_filters", "onCellClick", fe_all_filters.onCellClick, "WAF");
 	WAF.addListener("fe_search", "keyup", fe_search.keyup, "WAF");
 	WAF.addListener("search_filters", "keyup", search_filters.keyup, "WAF");
 	WAF.addListener("fe_save", "click", fe_save.click, "WAF");

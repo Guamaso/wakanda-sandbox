@@ -20,7 +20,7 @@ WAF.onAfterInit = function onAfterInit() {// @lock
 	{// @endlock
 		// Add your code here
 		sources.filterStates.Filter.set( sources.filters );
-		sources.filterStates.FilterPending.set( 1 );
+		sources.filterStates.FilterPending.set( true );
 		sources.filterStates.save();
 	};// @lock
 
